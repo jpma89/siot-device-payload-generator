@@ -100,7 +100,7 @@ Sample payload has been written to file "payload.json".
 - [ ] Add proper exception handling
 - [ ] Optimize performance by reducing number of API calls
 - [ ] Allow passing service key file as command line input parameter
-- [ ] Adjust overall logic to specifically handle model abstraction mappings to better support usage along with e.g. SAP® Asset Performance Management (APM <!--- <i4c-model-mapping-sap>/Model/v1/Assignments + <i4c-model-mapping-sap>/Model/v1/Assignments --->
+- [ ] Adjust overall logic to specifically handle model abstraction mappings to better support usage along with e.g. SAP® Asset Performance Management (APM)
 - [ ] Show progress bar per capabitliy instead of per sensor
 - [ ] Add a built-in MQTT and/or HTTP client to not only generate sample payloads but also offer the option to send the payload right away (using a Router Device)
 - [ ] Add a GUI
