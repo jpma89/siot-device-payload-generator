@@ -1,5 +1,5 @@
 # SIoT Device Payload Generator
-__SIoT Device Payload Generator__ is simple helper tool to generate sample payloads for the Device Connectivity component of SAP® Internet of Things. By looping through existing Device Model artifacts, this payload generator constructs a fully populated payload string for a given Device which can be used for e.g. test and development purposes.
+__SIoT Device Payload Generator__ is a simple helper tool to generate sample payloads for the Device Connectivity component of SAP® Internet of Things. By looping through existing Device Model artifacts, this payload generator constructs a fully populated payload string for a given Device which can be used for e.g. test and development purposes.
 
 **Important note**: This tool is a private hobby project and therefore not provided or supported by SAP® by any means. SAP® Internet of Things and all other SAP® products mentioned here are commercial products of SAP SE and not part of this project.
 
@@ -20,7 +20,7 @@ Please make sure you have an up-to-date version of Python and all required libra
 In particular:
 * Install [latest Python version](https://www.python.org/downloads/), but at least a Python version **>=3.10**
 * Install dependent Python libraries:
-```shell
+```
 ~$ py -m pip install requests, prettytable, tqdm
 ```
 
