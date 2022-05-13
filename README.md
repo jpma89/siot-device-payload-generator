@@ -28,8 +28,8 @@ In particular:
 
 1. Store the file `payload_generator.py` of this repository on your machine or simply check out the entire repository.
 2. Store your SAP® Internet of Things service key in JSON format (see section [Prerequisites](#prerequisites)) in the same folder than `payload_generator.py`. In below example the file name of this service key is `SAP IOT Service Key.txt`.
-3. Run `payload_generator.py` using your command line and follow the instructions displayed (see example below).
-4. Use the generated sample payload (either from the command line output or from the newly created file `payload.json`) as a basis for sending messages to SAP® Internet of Things Device Connectivity using your desired MQTT or HTTP client (see [official product documentation](https://help.sap.com/docs/SAP_IoT/226d46a15bb245b7bf8126604bd6f0fb/97854de9e5dd41c191db6aa65394e461.html) for more details).
+3. Run the Python program `payload_generator.py` on your command line and follow the instructions displayed (see example below).
+4. Use the generated sample payload (either from the command line output or from the newly created file `payload.json`) as a basis for sending messages to SAP® Internet of Things Device Connectivity using your favourite MQTT or HTTP client (see [official product documentation](https://help.sap.com/docs/SAP_IoT/226d46a15bb245b7bf8126604bd6f0fb/97854de9e5dd41c191db6aa65394e461.html) for more details).
 
 
 **Example:**
