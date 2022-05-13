@@ -4,7 +4,7 @@ __SIoT Device Payload Generator__ is a simple helper tool to generate sample pay
 **Important note**: This tool is a private hobby project and therefore not provided or supported by SAP® by any means. SAP® Internet of Things and all other SAP® products mentioned here are commercial products of SAP SE and not part of this project.
 
 ## Project status
-This hobby project currently (May 2022) is in a very early stage. Many aspects are not finished nor extensively tested yet. As I believe this tool can still provide benefit in its current stage, I decided to already share the preliminary state of development even if there is still quite some room for improvement (see section [Known issues and To-Dos](#known-issues-and-to-dos)).
+This hobby project currently (May 2022) is in a very early stage. Many aspects are not finished nor extensively tested yet. As I believe this tool can still provide benefit in its current stage, I decided to already share the preliminary state of development even if there is still quite some room for improvement (see section [Known issues and to dos](#known-issues-and-to-dos)).
 
 ## Prerequisites
 
@@ -25,6 +25,12 @@ In particular:
 ```
 
 ## Usage
+
+1. Store the file `payload_generator.py` of this repository on your machine or simply check out the entire repository.
+2. Store your SAP® Internet of Things service key in JSON format (see section [Prerequisites](#prerequisites)) in the same folder than `payload_generator.py`. In below example the file name of this service key is `SAP IOT Service Key.txt`.
+3. Run `payload_generator.py` using your command line and follow the instructions displayed (see example below).
+4. Use the generated sample payload (either from the command line output or from the newly created file `payload.json`) as a basis for sending messages to SAP® Internet of Things Device Connectivity using your desired MQTT or HTTP client (see [official product documentation](https://help.sap.com/docs/SAP_IoT/226d46a15bb245b7bf8126604bd6f0fb/97854de9e5dd41c191db6aa65394e461.html) for more details).
+
 
 **Example:**
 ```
@@ -92,7 +98,7 @@ Sensors: 100%|██████████████████████
 Sample payload has been written to file "payload.json".
 ```
 
-## Known issues and To-Dos
+## Known issues and to dos
 - [X] Automatically extract all relevant connection details from service key file
 - [ ] Perform proper development testing incl. all possible Device Model state edge cases and all possible data types
 - [ ] Rework OAuth2.0 credential flow
@@ -101,7 +107,7 @@ Sample payload has been written to file "payload.json".
 - [ ] Optimize performance by reducing number of API calls
 - [ ] Allow passing service key file as command line input parameter
 - [ ] Adjust overall logic to specifically handle model abstraction mappings to better support usage along with e.g. SAP® Asset Performance Management (APM)
-- [ ] Show progress bar per capabitliy instead of per sensor
+- [ ] Show progress bar per capability instead of per sensor
 - [ ] Add a built-in MQTT and/or HTTP client to not only generate sample payloads but also offer the option to send the payload right away (using a Router Device)
 - [ ] Add a GUI
 - [ ] Add option to enter target deviceId or alternateId directly in addition to selecting from a list of available devices
@@ -109,7 +115,7 @@ Sample payload has been written to file "payload.json".
 - [ ] Make resulting payload structure configurable
 - [ ] Add unit tests
 
-## Built With
+## Built with
 * [Requests](https://docs.python-requests.org)
 * [PrettyTable](https://pypi.org/project/prettytable)
 * [tqdm](https://github.com/tqdm/tqdm)
