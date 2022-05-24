@@ -27,16 +27,85 @@ In particular:
 ## Usage
 
 1. Store the file `payload_generator.py` of this repository on your machine or simply check out the entire repository.
-2. Store your SAP® Internet of Things service key in JSON format (see section [Prerequisites](#prerequisites)) in the same folder than `payload_generator.py`. In below example the file name of this service key is `SAP IOT Service Key.txt`.
-3. Run the Python program `payload_generator.py` on your command line and follow the instructions displayed (see example below).
+2. Store your SAP® Internet of Things service key in JSON format (see section [Prerequisites](#prerequisites)) in the same folder than `payload_generator.py`. In below example the file name of this service key is `SAP IOT Service Key.txt`.Alternatively lookup the full path to you service key file.
+3. Run the Python program `payload_generator.py` on your command line and follow the instructions displayed (see examples below).
 4. Use the generated sample payload (either from the command line output or from the newly created file `payload.json`) as a basis for sending messages to SAP® Internet of Things Device Connectivity using your favourite MQTT or HTTP client (see [official product documentation](https://help.sap.com/docs/SAP_IoT/226d46a15bb245b7bf8126604bd6f0fb/97854de9e5dd41c191db6aa65394e461.html) for more details).
 
-
-**Example:**
+ ### Example 1 - APM usage
 ```
  ~$ py payload_generator.py
 
-Please enter the full file name of your service key file, stored in the current directory (e.g. "SAP IOT Service Key.txt") ==>  SAP IOT Service Key.txt
+Please enter the full path incl. file name of your service key file (e.g. "SAP IOT Service Key.txt" in case the service key file is stored in the current directory).
+==>  SAP IOT Service Key.txt
+
+Do you want to generate a sample payload for Asset Performance Management (APM) or for pure SAP IoT Device Model/standalone usage?
+Enter "apm" for APM mode or "iot" for SAP IoT Device Model/standalone mode. In case you are not sure, enter "iot".
+==> apm
+
+APM mode selected
+
++----------+------------------------+
+| Line No. |  Technical Object ID   |
++----------+------------------------+
+|     1    |       E_10000024       |
+|     2    |       E_10000000       |
+|     3    |       E_20000502       |
+|     4    |       E_10000004       |
++----------+------------------------+
+
+Please enter the Line No. of the Technical Object for which you would like to generate a sample payload.
+==>  1
+
+Selected Technical Object:
++----------+---------------------+
+| Line No. | Technical Object ID |
++----------+---------------------+
+|    1     |      E_10000024     |
++----------+---------------------+
+
+Iterating over all sensors of selected technical object ...
+Sensors: 100%|█████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.21s/it]
+
+ [
+    {
+        "sensorAlternateId": "C",
+        "capabilityAlternateId": "P_ML2",
+        "timestamp": "2022-05-23T07:01:19.492312",
+        "measures": [
+            {
+                "MP_FLOWRATE": 123456789012.75233
+            }
+        ]
+    },
+    {
+        "sensorAlternateId": "M",
+        "capabilityAlternateId": "P_CML",
+        "timestamp": "2022-05-23T07:01:19.492312",
+        "measures": [
+            {
+                "MP_THICKNESS": 123456789012.75233,
+                "MP_SH_THICKNESS": 123456789012.75233
+            }
+        ]
+    }
+]
+
+Sample payload has been written to file "payload.json".
+
+```
+
+### Example 2 - SAP IoT standalone usage
+```
+ ~$ py payload_generator.py
+
+Please enter the full path incl. file name of your service key file (e.g. "SAP IOT Service Key.txt" in case the service key file is stored in the current directory).
+==>  SAP IOT Service Key.txt
+
+Do you want to generate a sample payload for Asset Performance Management (APM) or for pure SAP IoT Device Model/standalone usage?
+Enter "apm" for APM mode or "iot" for SAP IoT Device Model/standalone mode. In case you are not sure, enter "iot".
+==> iot
+
+IoT standalone mode selected
 
 Following Devices have been found:
 +----------+-----------------------+----------------------+--------------------------------------+
@@ -47,13 +116,13 @@ Following Devices have been found:
 |    3     | Location Tracker 4711 |   loc_tracker_4711   | 4669baae-d3ba-4635-a7f4-c256151b21ce |
 +----------+-----------------------+----------------------+--------------------------------------+
 
-Please enter the Line No. of the device for which you would like to generate a sample payload ==>  1
+Please enter the Line No. of the device for which you would like to generate a sample payload. ==>  1
 
 Selected device:
 +----------+--------------------+----------------------+--------------------------------------+
 | Line No. |     Device Name    | Device Alternate ID  |              Device ID               |
 +----------+--------------------+----------------------+--------------------------------------+
-|    10    | Temperate Device 1 | temperature_device_1 | bac6e52e-ce06-9459-8534-57f94c47aadb |
+|     1    | Temperate Device 1 | temperature_device_1 | bac6e52e-ce06-9459-8534-57f94c47aadb |
 +----------+--------------------+----------------------+--------------------------------------+
 
 Iterating over all sensors of selected device ...
@@ -96,11 +165,13 @@ Sensors: 100%|██████████████████████
 ]
 
 Sample payload has been written to file "payload.json".
+
 ```
 
 ## Known issues and to dos
 - [X] Automatically extract all relevant connection details from service key file
 - [ ] Perform proper development testing incl. all possible Device Model state edge cases and all possible data types
+- [ ] Review and improve payload generation logic of APM mode / consolidate into common flow to reduce code
 - [ ] Rework OAuth2.0 credential flow
 - [ ] Add proper user input validation
 - [ ] Add proper exception handling
