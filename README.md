@@ -36,7 +36,7 @@ In particular:
  ~$ py payload_generator.py
 
 Please enter the full path incl. file name of your service key file (e.g. "SAP IOT Service Key.txt" in case the service key file is stored in the current directory).
-==>  SAP IOT Service Key.txt
+==> SAP IOT Service Key.txt
 
 Do you want to generate a sample payload for Asset Performance Management (APM) or for pure SAP IoT Device Model/standalone usage?
 Enter "apm" for APM mode or "iot" for SAP IoT Device Model/standalone mode. In case you are not sure, enter "iot".
@@ -54,7 +54,7 @@ APM mode selected
 +----------+------------------------+
 
 Please enter the Line No. of the Technical Object for which you would like to generate a sample payload.
-==>  1
+==> 1
 
 Selected Technical Object:
 +----------+---------------------+
@@ -99,7 +99,7 @@ Sample payload has been written to file "payload.json".
  ~$ py payload_generator.py
 
 Please enter the full path incl. file name of your service key file (e.g. "SAP IOT Service Key.txt" in case the service key file is stored in the current directory).
-==>  SAP IOT Service Key.txt
+==> SAP IOT Service Key.txt
 
 Do you want to generate a sample payload for Asset Performance Management (APM) or for pure SAP IoT Device Model/standalone usage?
 Enter "apm" for APM mode or "iot" for SAP IoT Device Model/standalone mode. In case you are not sure, enter "iot".
@@ -116,7 +116,8 @@ Following Devices have been found:
 |    3     | Location Tracker 4711 |   loc_tracker_4711   | 4669baae-d3ba-4635-a7f4-c256151b21ce |
 +----------+-----------------------+----------------------+--------------------------------------+
 
-Please enter the Line No. of the device for which you would like to generate a sample payload. ==>  1
+Please enter the Line No. of the device for which you would like to generate a sample payload.
+==> 1
 
 Selected device:
 +----------+--------------------+----------------------+--------------------------------------+

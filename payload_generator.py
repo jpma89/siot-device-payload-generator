@@ -186,11 +186,13 @@ def writePayloadFile(samplePayload):
         print(samplePayload, file=text_file)
         print('\nSample payload has been written to file "payload.json".\n')
 
+#####################################
 ### Main control flow starts here ###
+#####################################
 
 # Step 1: Prompt user to select location of service key file
 #TODO handle possible error cases
-serviceKeyFileName = input('\nPlease enter the full path incl. file name of your service key file (e.g. "SAP IOT Service Key.txt" in case the service key file is stored in the current directory).\n==>  ')
+serviceKeyFileName = input('\nPlease enter the full path incl. file name of your service key file (e.g. "SAP IOT Service Key.txt" in case the service key file is stored in the current directory).\n==> ')
 deviceConnectivityUrl, modelMappingUrl, authenticationUrl, clientId, clientSecret, scopeDcRead, scopeDcAmRead, scopeDcCrud = readServiceKey(serviceKeyFileName)
 
 # Step 2: Ask user if the sample payload is required for APM or IoT standalone usage
@@ -219,7 +221,7 @@ if apmMode: # Following the APM path (path a) from here on
         print(assignmentsTable)
 
         #TODO handle possible error cases        
-        lineNo = input('\nPlease enter the Line No. of the Technical Object for which you would like to generate a sample payload.\n==>  ')
+        lineNo = input('\nPlease enter the Line No. of the Technical Object for which you would like to generate a sample payload.\n==> ')
 
         print('\nSelected Technical Object:')
         print(assignmentsTable[int(lineNo)-1]) # line input -1 to reflext correct index because displayed lines start with 1
@@ -255,7 +257,7 @@ else: # Following the IoT standalone path (path b) from here on
         print(devicesTable)
 
         #TODO handle possible error cases
-        lineNo = input('\nPlease enter the Line No. of the device for which you would like to generate a sample payload.\n ==>  ')
+        lineNo = input('\nPlease enter the Line No. of the device for which you would like to generate a sample payload.\n==> ')
     
         print('\nSelected device:')
         print(devicesTable[int(lineNo)-1]) # line input -1 to reflext correct index because displayed lines start with 1
