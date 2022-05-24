@@ -55,7 +55,6 @@ def getAssignments():
         del assignment['AssignmentId']
         del assignment['MappingId']
         del assignment['Sensors']
-
     return assignments
 
 def getAssignment(ObjectId):
@@ -127,13 +126,12 @@ def getIotSamplePayload(selectedDeviceId):
                         measuresPayloadObject[property['name']] = measurement
                     capabilityPayloadObject['measures'].append(measuresPayloadObject)
                     payload.append(capabilityPayloadObject)
-
         return json.dumps(payload, indent=4) # JSON pretty-printing
+    
     else: # there are no sensors assigned to the device
         return 'Stopping - No sensors have been assigned to selected device\n'
 
 def getApmSamplePayload(objectId):
-
     payload = []
     currentIsoTimestamp = datetime.datetime.utcnow().isoformat()
 
@@ -181,7 +179,6 @@ def getApmSamplePayload(objectId):
                         measuresPayloadObject[property['name']] = measurement
                     capabilityPayloadObject['measures'].append(measuresPayloadObject)
                     payload.append(capabilityPayloadObject)
-
     return json.dumps(payload, indent=4) # JSON pretty-printing
 
 def writePayloadFile(samplePayload):
@@ -189,21 +186,16 @@ def writePayloadFile(samplePayload):
         print(samplePayload, file=text_file)
         print('\nSample payload has been written to file "payload.json".\n')
 
-
-## Main program starts here
+### Main control flow starts here ###
 
 # Step 1: Prompt user to select location of service key file
-serviceKeyFileName = input('\nPlease enter the full path incl. file name of your service key file (e.g. "SAP IOT Service Key.txt" in case the service key file is stored in the current directory).\n==>  ')
 #TODO handle possible error cases
-
+serviceKeyFileName = input('\nPlease enter the full path incl. file name of your service key file (e.g. "SAP IOT Service Key.txt" in case the service key file is stored in the current directory).\n==>  ')
 deviceConnectivityUrl, modelMappingUrl, authenticationUrl, clientId, clientSecret, scopeDcRead, scopeDcAmRead, scopeDcCrud = readServiceKey(serviceKeyFileName)
-######
 
 # Step 2: Ask user if the sample payload is required for APM or IoT standalone usage
-
-print('\nDo you want to generate a sample payload for Asset Performance Management (APM) or for pure SAP IoT Device Model/standalone usage?')
-apmModeInput = input('Enter "apm" for APM mode or "iot" for SAP IoT Device Model/standalone mode. In case you are not sure, enter "iot".\n==> ')
 #TODO handle possible error cases
+apmModeInput = input('\nDo you want to generate a sample payload for Asset Performance Management (APM) or for pure SAP IoT Device Model/standalone usage? \nEnter "apm" for APM mode or "iot" for SAP IoT Device Model/standalone mode. In case you are not sure, enter "iot".\n==> ')
 
 if apmModeInput.lower() in ['apm']:
     apmMode = True
@@ -215,7 +207,7 @@ else:
     apmMode = False
     print('\nNo proper input detected - defaulting to IoT standalone mode')
 
-if apmMode:
+if apmMode: # Following the APM path (path a) from here on
     # Step 3a: Let user select one technical object based on existing assignments
     accessToken = getAccessToken(scopeDcAmRead)
     assignments = getAssignments()
@@ -225,9 +217,9 @@ if apmMode:
         for index, assignment in enumerate(assignments):
             assignmentsTable.add_row([index+1,assignment['ObjectId']]) # index+1 such that displayed lines start with 1 instead of 0
         print(assignmentsTable)
-        
+
+        #TODO handle possible error cases        
         lineNo = input('\nPlease enter the Line No. of the Technical Object for which you would like to generate a sample payload.\n==>  ')
-        #TODO handle possible error cases
 
         print('\nSelected Technical Object:')
         print(assignmentsTable[int(lineNo)-1]) # line input -1 to reflext correct index because displayed lines start with 1
@@ -240,7 +232,7 @@ if apmMode:
         
         #TODO Step 5a: Allow user to modify generated sample payload
 
-        #TODO Step 6a: Allow user to manually send edited/original sample payload to selected device
+        #TODO Step 6a: Allow user to manually send edited/original sample payload to selected technical object
         ## If no credentails for router device assigend to affected Gateway are present: Offer user to automatically create a new router device for affected Gateway and store router device details incl. client certificate for later reuse
         ## Send payload for selected device via newly created/existing router device
 
@@ -249,7 +241,8 @@ if apmMode:
 
     else: # There are no assignments present in current SAP IoT tenant
         print('\nNo assignments have been detected in your SAP IoT tenant. Please consider using IoT standalone mode instead of APM mode.\n')
-else:
+
+else: # Following the IoT standalone path (path b) from here on
     # Step 3b: Let user select one device out of a list of retrieved devices
     accessToken = getAccessToken(scopeDcRead)
     devices = getDevices()
@@ -261,9 +254,9 @@ else:
             devicesTable.add_row([index+1,device['name'],device['alternateId'],device['id']]) # index+1 such that displayed lines start with 1 instead of 0
         print(devicesTable)
 
-        lineNo = input('\nPlease enter the Line No. of the device for which you would like to generate a sample payload.\n ==>  ')
         #TODO handle possible error cases
-
+        lineNo = input('\nPlease enter the Line No. of the device for which you would like to generate a sample payload.\n ==>  ')
+    
         print('\nSelected device:')
         print(devicesTable[int(lineNo)-1]) # line input -1 to reflext correct index because displayed lines start with 1
         selectedDevice = devices[int(lineNo)-1]
