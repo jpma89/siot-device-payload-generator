@@ -27,7 +27,7 @@ In particular:
 ## Usage
 
 1. Store the file `payload_generator.py` of this repository on your machine or simply check out the entire repository.
-2. Store your SAP® Internet of Things service key in JSON format (see section [Prerequisites](#prerequisites)) in the same folder than `payload_generator.py`. In below example the file name of this service key is `SAP IOT Service Key.txt`.Alternatively lookup the full path to you service key file.
+2. Store your SAP® Internet of Things service key in JSON format (see section [Prerequisites](#prerequisites)) in the same folder than `payload_generator.py`. In below example the file name of this service key is `SAP IOT Service Key.txt`. Alternatively have the full path to you service key file ready to copy when running this Python program.
 3. Run the Python program `payload_generator.py` on your command line and follow the instructions displayed (see examples below).
 4. Use the generated sample payload (either from the command line output or from the newly created file `payload.json`) as a basis for sending messages to SAP® Internet of Things Device Connectivity using your favourite MQTT or HTTP client (see [official product documentation](https://help.sap.com/docs/SAP_IoT/226d46a15bb245b7bf8126604bd6f0fb/97854de9e5dd41c191db6aa65394e461.html) for more details).
 
@@ -170,6 +170,7 @@ Sample payload has been written to file "payload.json".
 
 ## Known issues and to dos
 - [X] Automatically extract all relevant connection details from service key file
+- [X] Adjust overall logic to specifically handle model abstraction mappings to better support usage along with e.g. SAP® Asset Performance Management (APM)
 - [ ] Perform proper development testing incl. all possible Device Model state edge cases and all possible data types
 - [ ] Review and improve payload generation logic of APM mode / consolidate into common flow to reduce code
 - [ ] Rework OAuth2.0 credential flow
@@ -177,7 +178,6 @@ Sample payload has been written to file "payload.json".
 - [ ] Add proper exception handling
 - [ ] Optimize performance by reducing number of API calls
 - [ ] Allow passing service key file as command line input parameter
-- [ ] Adjust overall logic to specifically handle model abstraction mappings to better support usage along with e.g. SAP® Asset Performance Management (APM)
 - [ ] Show progress bar per capability instead of per sensor
 - [ ] Add a built-in MQTT and/or HTTP client to not only generate sample payloads but also offer the option to send the payload right away (using a Router Device)
 - [ ] Add a GUI
